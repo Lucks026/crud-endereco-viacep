@@ -13,125 +13,111 @@
   <script defer src="js/cadastro.js"></script>
 </head>
 <body>
-  <main class="janela">
-    <div class="janela-barra">
-      <span class="bolinhas" aria-hidden="true">
-        <span class="bolinha bolinha-vermelha"></span>
-        <span class="bolinha bolinha-amarela"></span>
-        <span class="bolinha bolinha-verde"></span>
-      </span>
-      <span id="caminho">~/clientes/novo</span>
-    </div>
+  <main class="conteudo">
+    <header class="cabecalho">
+      <h1 id="titulo">Novo cliente</h1>
+      <a href="listagem.html">Ver listagem</a>
+    </header>
 
-    <div class="janela-corpo">
-      <header class="cabecalho">
-        <h1>
-          <span class="prompt" aria-hidden="true">~$</span>
-          <span id="titulo">Novo cliente</span><span class="cursor" aria-hidden="true"></span>
-        </h1>
-        <a href="listagem.html">Ver listagem</a>
-      </header>
+    <form id="formulario" novalidate autocomplete="off">
+      <p class="nota">Campos com * são obrigatórios.</p>
 
-      <form id="formulario" novalidate autocomplete="off">
-        <p class="nota">Campos com * são obrigatórios.</p>
+      <fieldset>
+        <legend>Dados do Cliente</legend>
 
-        <fieldset>
-          <legend><span class="prompt" aria-hidden="true">~$</span> Dados do Cliente</legend>
-
-          <div class="linha">
-            <div>
-              <label for="nome">Nome <span aria-hidden="true">*</span></label>
-              <input type="text" id="nome" name="nome" required aria-describedby="erro-nome">
-              <p class="campo-erro" id="erro-nome"></p>
-            </div>
+        <div class="linha">
+          <div>
+            <label for="nome">Nome <span aria-hidden="true">*</span></label>
+            <input type="text" id="nome" name="nome" required aria-describedby="erro-nome">
+            <p class="campo-erro" id="erro-nome"></p>
           </div>
+        </div>
 
-          <div class="linha linha-dupla">
-            <div>
-              <label for="email">E-mail <span aria-hidden="true">*</span></label>
-              <input type="email" id="email" name="email" required aria-describedby="erro-email">
-              <p class="campo-erro" id="erro-email"></p>
-            </div>
-            <div>
-              <label for="telefone">Telefone</label>
-              <input type="tel" id="telefone" name="telefone" inputmode="tel" aria-describedby="erro-telefone">
-              <p class="campo-erro" id="erro-telefone"></p>
-            </div>
+        <div class="linha linha-dupla">
+          <div>
+            <label for="email">E-mail <span aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" required aria-describedby="erro-email">
+            <p class="campo-erro" id="erro-email"></p>
           </div>
-
-          <div class="linha linha-dupla">
-            <div>
-              <label for="cpf">CPF <span aria-hidden="true">*</span></label>
-              <input type="text" id="cpf" name="cpf" inputmode="numeric" required aria-describedby="erro-cpf">
-              <p class="campo-erro" id="erro-cpf"></p>
-            </div>
-            <div>
-              <label for="dataNascimento">Data de nascimento</label>
-              <input type="date" id="dataNascimento" name="dataNascimento" aria-describedby="erro-dataNascimento">
-              <p class="campo-erro" id="erro-dataNascimento"></p>
-            </div>
+          <div>
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" inputmode="tel" aria-describedby="erro-telefone">
+            <p class="campo-erro" id="erro-telefone"></p>
           </div>
-        </fieldset>
+        </div>
 
-        <fieldset>
-          <legend><span class="prompt" aria-hidden="true">~$</span> Endereço</legend>
-
-          <div class="linha">
-            <div>
-              <label for="cep">CEP <span aria-hidden="true">*</span></label>
-              <div class="campo-com-botao">
-                <input type="text" id="cep" name="cep" inputmode="numeric" required aria-describedby="erro-cep">
-                <button type="button" class="botao" id="botao-cep">Pesquisar CEP</button>
-              </div>
-              <p class="campo-erro" id="erro-cep" aria-live="polite"></p>
-            </div>
+        <div class="linha linha-dupla">
+          <div>
+            <label for="cpf">CPF <span aria-hidden="true">*</span></label>
+            <input type="text" id="cpf" name="cpf" inputmode="numeric" required aria-describedby="erro-cpf">
+            <p class="campo-erro" id="erro-cpf"></p>
           </div>
-
-          <div class="linha linha-larga">
-            <div>
-              <label for="logradouro">Logradouro <span aria-hidden="true">*</span></label>
-              <input type="text" id="logradouro" name="logradouro" required aria-describedby="erro-logradouro">
-              <p class="campo-erro" id="erro-logradouro"></p>
-            </div>
-            <div>
-              <label for="numero">Número <span aria-hidden="true">*</span></label>
-              <input type="text" id="numero" name="numero" required aria-describedby="erro-numero">
-              <p class="campo-erro" id="erro-numero"></p>
-            </div>
+          <div>
+            <label for="dataNascimento">Data de nascimento</label>
+            <input type="date" id="dataNascimento" name="dataNascimento" aria-describedby="erro-dataNascimento">
+            <p class="campo-erro" id="erro-dataNascimento"></p>
           </div>
+        </div>
+      </fieldset>
 
-          <div class="linha linha-dupla">
-            <div>
-              <label for="complemento">Complemento</label>
-              <input type="text" id="complemento" name="complemento" aria-describedby="erro-complemento">
-              <p class="campo-erro" id="erro-complemento"></p>
+      <fieldset>
+        <legend>Endereço</legend>
+
+        <div class="linha">
+          <div>
+            <label for="cep">CEP <span aria-hidden="true">*</span></label>
+            <div class="campo-com-botao">
+              <input type="text" id="cep" name="cep" inputmode="numeric" required aria-describedby="erro-cep">
+              <button type="button" class="botao" id="botao-cep">Pesquisar CEP</button>
             </div>
-            <div>
-              <label for="bairro">Bairro <span aria-hidden="true">*</span></label>
-              <input type="text" id="bairro" name="bairro" required aria-describedby="erro-bairro">
-              <p class="campo-erro" id="erro-bairro"></p>
-            </div>
+            <p class="campo-erro" id="erro-cep" aria-live="polite"></p>
           </div>
+        </div>
 
-          <div class="linha linha-larga">
-            <div>
-              <label for="cidade">Cidade <span aria-hidden="true">*</span></label>
-              <input type="text" id="cidade" name="cidade" required aria-describedby="erro-cidade">
-              <p class="campo-erro" id="erro-cidade"></p>
-            </div>
-            <div>
-              <label for="uf">UF <span aria-hidden="true">*</span></label>
-              <input type="text" class="caixa-alta" id="uf" name="uf" maxlength="2" required aria-describedby="erro-uf">
-              <p class="campo-erro" id="erro-uf"></p>
-            </div>
+        <div class="linha linha-larga">
+          <div>
+            <label for="logradouro">Logradouro <span aria-hidden="true">*</span></label>
+            <input type="text" id="logradouro" name="logradouro" required aria-describedby="erro-logradouro">
+            <p class="campo-erro" id="erro-logradouro"></p>
           </div>
-        </fieldset>
+          <div>
+            <label for="numero">Número <span aria-hidden="true">*</span></label>
+            <input type="text" id="numero" name="numero" required aria-describedby="erro-numero">
+            <p class="campo-erro" id="erro-numero"></p>
+          </div>
+        </div>
 
-        <button type="submit" class="botao botao-principal" id="botao-salvar">Salvar</button>
-      </form>
+        <div class="linha linha-dupla">
+          <div>
+            <label for="complemento">Complemento</label>
+            <input type="text" id="complemento" name="complemento" aria-describedby="erro-complemento">
+            <p class="campo-erro" id="erro-complemento"></p>
+          </div>
+          <div>
+            <label for="bairro">Bairro <span aria-hidden="true">*</span></label>
+            <input type="text" id="bairro" name="bairro" required aria-describedby="erro-bairro">
+            <p class="campo-erro" id="erro-bairro"></p>
+          </div>
+        </div>
 
-      <p class="saida" id="mensagem" role="status"></p>
-    </div>
+        <div class="linha linha-larga">
+          <div>
+            <label for="cidade">Cidade <span aria-hidden="true">*</span></label>
+            <input type="text" id="cidade" name="cidade" required aria-describedby="erro-cidade">
+            <p class="campo-erro" id="erro-cidade"></p>
+          </div>
+          <div>
+            <label for="uf">UF <span aria-hidden="true">*</span></label>
+            <input type="text" class="caixa-alta" id="uf" name="uf" maxlength="2" required aria-describedby="erro-uf">
+            <p class="campo-erro" id="erro-uf"></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="botao botao-principal" id="botao-salvar">Salvar</button>
+    </form>
+
+    <p class="saida" id="mensagem" role="status"></p>
   </main>
 
   <footer class="rodape">

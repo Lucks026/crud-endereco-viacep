@@ -13,46 +13,32 @@
   <script defer src="js/listagem.js"></script>
 </head>
 <body>
-  <main class="janela janela-larga">
-    <div class="janela-barra">
-      <span class="bolinhas" aria-hidden="true">
-        <span class="bolinha bolinha-vermelha"></span>
-        <span class="bolinha bolinha-amarela"></span>
-        <span class="bolinha bolinha-verde"></span>
-      </span>
-      <span>~/clientes</span>
+  <main class="conteudo conteudo-largo">
+    <header class="cabecalho">
+      <h1 id="titulo">Clientes</h1>
+      <a class="botao" id="link-novo" href="index.html">Novo Cliente</a>
+    </header>
+
+    <div class="busca" id="bloco-busca" hidden>
+      <label for="busca">Buscar por nome</label>
+      <input type="search" id="busca" autocomplete="off">
     </div>
 
-    <div class="janela-corpo">
-      <header class="cabecalho">
-        <h1>
-          <span class="prompt" aria-hidden="true">~$</span>
-          <span id="titulo">Clientes</span><span class="cursor" aria-hidden="true"></span>
-        </h1>
-        <a class="botao" id="link-novo" href="index.html">Novo Cliente</a>
-      </header>
+    <table class="tabela" id="tabela" aria-labelledby="titulo" hidden>
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Cidade/UF</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody id="corpo-tabela"></tbody>
+    </table>
 
-      <div class="busca" id="bloco-busca" hidden>
-        <label for="busca">Buscar por nome</label>
-        <input type="search" id="busca" autocomplete="off">
-      </div>
-
-      <table class="tabela" id="tabela" aria-labelledby="titulo" hidden>
-        <thead>
-          <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Telefone</th>
-            <th scope="col">Cidade/UF</th>
-            <th scope="col">Ações</th>
-          </tr>
-        </thead>
-        <tbody id="corpo-tabela"></tbody>
-      </table>
-
-      <p class="estado" id="estado" role="status"></p>
-      <p class="saida" id="mensagem" role="status"></p>
-    </div>
+    <p class="estado" id="estado" role="status"></p>
+    <p class="saida" id="mensagem" role="status"></p>
   </main>
 
   <footer class="rodape">

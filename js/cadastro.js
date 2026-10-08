@@ -212,7 +212,6 @@ function preencherFormulario(cliente) {
 async function carregarEdicao() {
   document.title = 'Editar cliente';
   document.getElementById('titulo').textContent = 'Editar cliente';
-  document.getElementById('caminho').textContent = '~/clientes/editar';
 
   formulario.hidden = true;
   mostrarMensagem('Carregando cliente...');
