@@ -2,6 +2,7 @@ const formulario = document.getElementById('formulario');
 const campos = formulario.elements;
 const mensagem = document.getElementById('mensagem');
 const botaoCep = document.getElementById('botao-cep');
+const botaoSalvar = document.getElementById('botao-salvar');
 
 const soDigitos = texto => texto.replace(/\D/g, '');
 
@@ -153,6 +154,47 @@ async function pesquisarCep() {
   }
 }
 
+function lerFormulario() {
+  const valor = id => campos[id].value.trim();
+  return {
+    nome: valor('nome'),
+    email: valor('email'),
+    telefone: valor('telefone'),
+    cpf: valor('cpf'),
+    dataNascimento: valor('dataNascimento'),
+    endereco: {
+      cep: valor('cep'),
+      logradouro: valor('logradouro'),
+      numero: valor('numero'),
+      complemento: valor('complemento'),
+      bairro: valor('bairro'),
+      cidade: valor('cidade'),
+      uf: valor('uf').toUpperCase(),
+    },
+  };
+}
+
+async function salvar(evento) {
+  evento.preventDefault();
+  if (botaoSalvar.disabled || !validarFormulario()) return;
+
+  botaoSalvar.disabled = true;
+  botaoSalvar.textContent = 'Salvando...';
+  try {
+    await criar(lerFormulario());
+    formulario.reset();
+    mostrarMensagem('Cliente salvo.', 'ok');
+    campos.nome.focus();
+  } catch (erro) {
+    mostrarMensagem(mensagemErroCrud(erro), 'erro');
+  } finally {
+    botaoSalvar.disabled = false;
+    botaoSalvar.textContent = 'Salvar';
+    // desabilitar o botão derruba o foco de quem navega pelo teclado
+    if (document.activeElement === document.body) botaoSalvar.focus();
+  }
+}
+
 formulario.addEventListener('input', evento => {
   const campo = evento.target;
   if (mascaras[campo.id]) aplicarMascara(campo);
@@ -168,3 +210,5 @@ campos.cep.addEventListener('keydown', evento => {
   evento.preventDefault();
   pesquisarCep();
 });
+
+formulario.addEventListener('submit', salvar);
