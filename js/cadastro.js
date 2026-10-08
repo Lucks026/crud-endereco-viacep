@@ -182,7 +182,13 @@ async function salvar(evento) {
   botaoSalvar.disabled = true;
   botaoSalvar.textContent = 'Salvando...';
   try {
-    await criar(lerFormulario());
+    const cliente = lerFormulario();
+    if (idEdicao) {
+      await atualizar(idEdicao, cliente);
+      location.href = 'listagem.html?ok=editado';
+      return;
+    }
+    await criar(cliente);
     formulario.reset();
     mostrarMensagem('Cliente salvo.', 'ok');
     campos.nome.focus();
