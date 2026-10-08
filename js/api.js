@@ -80,6 +80,6 @@ function excluir(id) {
 function mensagemErroCrud(erro) {
   if (!idConfigurado()) return MENSAGEM_SEM_ID;
   if (erro.naoEncontrado) return 'Registro não encontrado.';
-  if (erro.name === 'AbortError') return 'O CrudCrud demorou demais para responder. Tente de novo em instantes.';
-  return 'Não deu para acessar o CrudCrud. Se o ID venceu, gere outro em crudcrud.com e atualize o js/config.js. Se o ID é novo, tente de novo em instantes.';
+  if (erro.name === 'AbortError') return 'O CrudCrud demorou demais para responder. Tente de novo daqui a pouco.';
+  return 'Não deu para acessar o CrudCrud. Se o ID venceu, gere outro em crudcrud.com e troque no js/config.js. Se o ID é novo, tente de novo daqui a pouco.';
 }
