@@ -1,0 +1,350 @@
+:root {
+  color-scheme: dark;
+
+  --fundo: #161616;
+  --camada: #262626;
+  --camada-alta: #393939;
+  --borda: #393939;
+  --borda-campo: #8d8d8d;
+  --texto: #f4f4f4;
+  --texto-fraco: #c6c6c6;
+  --branco: #ffffff;
+  --link: #78a9ff;
+  --azul: #0f62fe;
+  --azul-escuro: #0353e9;
+  --cinza: #6f6f6f;
+  --cinza-escuro: #5e5e5e;
+  --verde: #42be65;
+  --vermelho: #ff8389;
+  --vermelho-escuro: #da1e28;
+
+  --espaco-1: 0.25rem;
+  --espaco-2: 0.5rem;
+  --espaco-3: 1rem;
+  --espaco-4: 1.5rem;
+  --espaco-5: 2rem;
+  --espaco-6: 3rem;
+
+  --fonte: 'IBM Plex Sans', system-ui, sans-serif;
+  --pequeno: 0.75rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* folga para o aviso preso na base não cobrir o campo que recebe o foco */
+  scroll-padding-bottom: 5rem;
+}
+
+body {
+  margin: 0;
+  padding: var(--espaco-3);
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--link);
+}
+
+:focus-visible {
+  outline: 2px solid var(--texto);
+  outline-offset: 2px;
+}
+
+.conteudo {
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+.conteudo-largo {
+  max-width: 64rem;
+}
+
+@media (min-width: 640px) {
+  body {
+    padding: var(--espaco-5) var(--espaco-4);
+  }
+}
+
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2) var(--espaco-3);
+  margin-bottom: var(--espaco-5);
+  padding-bottom: var(--espaco-4);
+  border-bottom: 1px solid var(--borda);
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.25;
+}
+
+.nota {
+  margin: 0 0 var(--espaco-4);
+  color: var(--texto-fraco);
+}
+
+fieldset {
+  min-width: 0;
+  margin: 0 0 var(--espaco-5);
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  padding: 0 0 var(--espaco-4);
+  font-size: 1.25rem;
+}
+
+.linha {
+  display: grid;
+  gap: var(--espaco-3);
+  margin-bottom: var(--espaco-3);
+}
+
+@media (min-width: 640px) {
+  .linha-dupla {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .linha-larga {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: var(--espaco-2);
+  color: var(--texto-fraco);
+  font-size: var(--pequeno);
+}
+
+input {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0 var(--espaco-3);
+  background: var(--camada);
+  border: 0;
+  border-bottom: 1px solid var(--borda-campo);
+  border-radius: 0;
+  color: var(--texto);
+  font: inherit;
+  /* com menos de 16px o iOS dá zoom na página ao focar o campo */
+  font-size: 1rem;
+}
+
+.caixa-alta {
+  text-transform: uppercase;
+}
+
+.campo-com-botao {
+  display: flex;
+  gap: var(--espaco-2);
+  max-width: 24rem;
+}
+
+input[aria-invalid="true"] {
+  outline: 2px solid var(--vermelho);
+  outline-offset: -2px;
+}
+
+/* em campo e botão o contorno de foco fica por dentro, para não encostar no vizinho */
+input:focus-visible,
+.botao:focus-visible {
+  outline: 2px solid var(--texto);
+  outline-offset: -2px;
+}
+
+.campo-erro {
+  margin: 0;
+  color: var(--vermelho);
+  font-size: var(--pequeno);
+}
+
+.campo-erro:not(:empty) {
+  margin-top: var(--espaco-1);
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  /* texto à esquerda, com folga maior à direita */
+  padding: 0 var(--espaco-6) 0 var(--espaco-3);
+  background: var(--cinza);
+  border: 1px solid transparent;
+  border-radius: 0;
+  color: var(--branco);
+  font: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.botao:hover:not(:disabled) {
+  background: var(--cinza-escuro);
+}
+
+.botao-principal {
+  min-height: 3rem;
+  background: var(--azul);
+}
+
+.botao-principal:hover:not(:disabled) {
+  background: var(--azul-escuro);
+}
+
+.botao-contorno {
+  background: transparent;
+  border-color: var(--link);
+  color: var(--link);
+}
+
+.botao-contorno:hover:not(:disabled) {
+  background: var(--azul);
+  border-color: var(--azul);
+  color: var(--branco);
+}
+
+.botao-perigo {
+  background: transparent;
+  border-color: var(--vermelho);
+  color: var(--vermelho);
+}
+
+.botao-perigo:hover:not(:disabled) {
+  background: var(--vermelho-escuro);
+  border-color: var(--vermelho-escuro);
+  color: var(--branco);
+}
+
+.botao:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.saida {
+  margin: 0;
+}
+
+/* fica presa na base da tela para aparecer mesmo com a página rolada */
+.saida:not(:empty) {
+  position: sticky;
+  bottom: var(--espaco-3);
+  margin-top: var(--espaco-3);
+  padding: var(--espaco-3);
+  background: var(--camada-alta);
+  border-left: 3px solid var(--borda-campo);
+}
+
+.saida[data-tipo="ok"] {
+  border-left-color: var(--verde);
+}
+
+.saida[data-tipo="erro"] {
+  border-left-color: var(--vermelho);
+}
+
+.estado {
+  margin: 0;
+  color: var(--texto-fraco);
+}
+
+.estado[data-tipo="erro"] {
+  color: var(--vermelho);
+}
+
+.busca {
+  max-width: 24rem;
+  margin-bottom: var(--espaco-3);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela th {
+  font-weight: 600;
+  text-align: left;
+}
+
+/* No celular cada linha vira um bloco e o nome da coluna vem do data-rotulo */
+.tabela thead {
+  display: none;
+}
+
+.tabela tr {
+  display: block;
+  padding: var(--espaco-3);
+  background: var(--camada);
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela td {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.tabela td[data-rotulo]::before {
+  content: attr(data-rotulo) ": ";
+  color: var(--texto-fraco);
+}
+
+.tabela td:last-child {
+  margin-top: var(--espaco-2);
+}
+
+.tabela .botao {
+  min-height: 2rem;
+  padding: 0 var(--espaco-3);
+}
+
+.tabela .botao + .botao {
+  margin-left: var(--espaco-2);
+}
+
+@media (min-width: 640px) {
+  .tabela thead {
+    display: table-header-group;
+  }
+
+  .tabela tr {
+    display: table-row;
+  }
+
+  .tabela thead tr {
+    background: var(--camada-alta);
+  }
+
+  .tabela th,
+  .tabela td {
+    display: table-cell;
+    height: 3rem;
+    padding: 0 var(--espaco-3);
+  }
+
+  .tabela td[data-rotulo]::before {
+    content: none;
+  }
+}
+
+.rodape {
+  margin-top: var(--espaco-5);
+  color: var(--texto-fraco);
+  font-size: var(--pequeno);
+  text-align: center;
+}
