@@ -327,6 +327,19 @@ input[aria-invalid="true"] {
   color: var(--texto-fraco);
 }
 
+.tabela td:last-child {
+  margin-top: var(--espaco-2);
+}
+
+.tabela .botao {
+  padding: var(--espaco-1) var(--espaco-2);
+  font-size: var(--pequeno);
+}
+
+.tabela .botao + .botao {
+  margin-left: var(--espaco-2);
+}
+
 @media (min-width: 640px) {
   .tabela thead {
     display: table-header-group;
