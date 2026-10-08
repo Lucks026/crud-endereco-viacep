@@ -85,7 +85,7 @@ function criarLinha(cliente) {
 
 // minúsculas e sem acento, para "jose" encontrar "José"
 function normalizar(texto) {
-  return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  return texto.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
 }
 
 function desenharTabela() {
