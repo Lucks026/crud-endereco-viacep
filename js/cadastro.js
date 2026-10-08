@@ -49,6 +49,58 @@ function aplicarMascara(campo) {
   campo.setSelectionRange(posicao, posicao);
 }
 
+// Data de hoje no formato do input date (AAAA-MM-DD), no fuso do navegador
+function hoje() {
+  const agora = new Date();
+  const mes = String(agora.getMonth() + 1).padStart(2, '0');
+  const dia = String(agora.getDate()).padStart(2, '0');
+  return `${agora.getFullYear()}-${mes}-${dia}`;
+}
+
+// Devolve a mensagem de erro do campo, ou texto vazio se estiver tudo certo
+function validarCampo(campo) {
+  const valor = campo.value.trim();
+  // data digitada pela metade chega com valor vazio, e só o badInput denuncia
+  if (campo.type === 'date' && campo.validity.badInput) return 'Data inválida.';
+  if (!valor) return campo.required ? 'Campo obrigatório.' : '';
+
+  switch (campo.id) {
+    case 'email':
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor) ? '' : 'E-mail inválido.';
+    case 'telefone':
+      return [10, 11].includes(soDigitos(valor).length) ? '' : 'Telefone deve ter 10 ou 11 dígitos.';
+    case 'cpf':
+      return soDigitos(valor).length === 11 ? '' : 'CPF deve ter 11 dígitos.';
+    case 'dataNascimento':
+      return valor <= hoje() ? '' : 'A data não pode ser futura.';
+    case 'cep':
+      return soDigitos(valor).length === 8 ? '' : 'CEP deve ter 8 dígitos.';
+    case 'uf':
+      return /^[a-z]{2}$/i.test(valor) ? '' : 'UF deve ter 2 letras.';
+    default:
+      return '';
+  }
+}
+
+// Campo que já estava marcado com erro é conferido de novo a cada mudança
+function revalidar(campo) {
+  if (campo.hasAttribute('aria-invalid')) mostrarErroCampo(campo, validarCampo(campo));
+}
+
+function validarFormulario() {
+  let primeiroInvalido = null;
+  for (const campo of formulario.querySelectorAll('input')) {
+    const erro = validarCampo(campo);
+    mostrarErroCampo(campo, erro);
+    if (erro && !primeiroInvalido) primeiroInvalido = campo;
+  }
+  if (!primeiroInvalido) return true;
+
+  mostrarMensagem('Confira os campos destacados.', 'erro');
+  primeiroInvalido.focus();
+  return false;
+}
+
 function preencherEndereco(dados) {
   const valores = {
     logradouro: dados.logradouro,
@@ -58,6 +110,7 @@ function preencherEndereco(dados) {
   };
   for (const [id, valor] of Object.entries(valores)) {
     campos[id].value = valor || '';
+    revalidar(campos[id]);
   }
 }
 
@@ -103,6 +156,8 @@ async function pesquisarCep() {
 formulario.addEventListener('input', evento => {
   const campo = evento.target;
   if (mascaras[campo.id]) aplicarMascara(campo);
+  revalidar(campo);
+  mostrarMensagem('');
 });
 
 botaoCep.addEventListener('click', pesquisarCep);
