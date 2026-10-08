@@ -17,6 +17,18 @@ function criarCelula(rotulo, texto) {
   return celula;
 }
 
+function criarAcoes(cliente) {
+  const editar = document.createElement('a');
+  editar.href = `index.html?id=${encodeURIComponent(cliente._id)}`;
+  editar.className = 'botao';
+  editar.textContent = 'Editar';
+  editar.setAttribute('aria-label', `Editar ${cliente.nome}`);
+
+  const celula = document.createElement('td');
+  celula.append(editar);
+  return celula;
+}
+
 function criarLinha(cliente) {
   const endereco = cliente.endereco || {};
   const cidadeUf = [endereco.cidade, endereco.uf].filter(Boolean).join('/');
@@ -27,6 +39,7 @@ function criarLinha(cliente) {
     criarCelula('E-mail', cliente.email),
     criarCelula('Telefone', cliente.telefone),
     criarCelula('Cidade/UF', cidadeUf),
+    criarAcoes(cliente),
   );
   return linha;
 }
