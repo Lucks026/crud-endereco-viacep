@@ -250,6 +250,32 @@ input[aria-invalid="true"] {
   cursor: wait;
 }
 
+.saida {
+  margin: 0;
+}
+
+/* fica presa na base da tela para aparecer mesmo com a página rolada */
+.saida:not(:empty) {
+  position: sticky;
+  bottom: 0;
+  margin-top: var(--espaco-3);
+  padding: var(--espaco-2) 0;
+  background: var(--janela);
+  border-top: 1px solid var(--borda);
+}
+
+.saida:not(:empty)::before {
+  content: "> " / "";
+}
+
+[data-tipo="ok"] {
+  color: var(--verde);
+}
+
+[data-tipo="erro"] {
+  color: var(--vermelho);
+}
+
 .rodape {
   margin-top: var(--espaco-4);
   color: var(--texto-fraco);
