@@ -98,3 +98,44 @@ a {
     padding: var(--espaco-4);
   }
 }
+
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2) var(--espaco-3);
+  margin-bottom: var(--espaco-4);
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  text-transform: lowercase;
+}
+
+.prompt {
+  color: var(--verde);
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  margin-left: var(--espaco-1);
+  background: var(--verde);
+  vertical-align: text-bottom;
+  animation: piscar 1.1s steps(1) infinite;
+}
+
+@keyframes piscar {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}
