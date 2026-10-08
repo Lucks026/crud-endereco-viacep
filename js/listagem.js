@@ -1,3 +1,5 @@
+const blocoBusca = document.getElementById('bloco-busca');
+const campoBusca = document.getElementById('busca');
 const tabela = document.getElementById('tabela');
 const corpoTabela = document.getElementById('corpo-tabela');
 const estado = document.getElementById('estado');
@@ -81,13 +83,26 @@ function criarLinha(cliente) {
   return linha;
 }
 
+// minúsculas e sem acento, para "jose" encontrar "José"
+function normalizar(texto) {
+  return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+}
+
 function desenharTabela() {
-  corpoTabela.replaceChildren(...clientes.map(criarLinha));
-  tabela.hidden = clientes.length === 0;
-  mostrarEstado(clientes.length === 0 ? 'Nenhum cliente cadastrado.' : '');
+  const termo = normalizar(campoBusca.value.trim());
+  const visiveis = clientes.filter(cliente => normalizar(cliente.nome || '').includes(termo));
+
+  corpoTabela.replaceChildren(...visiveis.map(criarLinha));
+  blocoBusca.hidden = clientes.length === 0;
+  tabela.hidden = visiveis.length === 0;
+
+  if (clientes.length === 0) mostrarEstado('Nenhum cliente cadastrado.');
+  else if (visiveis.length === 0) mostrarEstado('Nenhum cliente com esse nome.');
+  else mostrarEstado('');
 }
 
 async function carregarClientes() {
+  blocoBusca.hidden = true;
   tabela.hidden = true;
   mostrarEstado('Carregando clientes...');
   try {
@@ -98,6 +113,8 @@ async function carregarClientes() {
   }
   desenharTabela();
 }
+
+campoBusca.addEventListener('input', desenharTabela);
 
 // pageshow dispara na carga e também quando a página volta do histórico,
 // que é quando a lista em tela pode estar desatualizada
