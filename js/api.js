@@ -45,8 +45,18 @@ function listar() {
   return requisitarCrud();
 }
 
-function buscarPorId(id) {
-  return requisitarCrud(`/${encodeURIComponent(id)}`);
+// O 404 também chega sem status. Se a busca falha mas a listagem responde,
+// o endpoint está de pé e é o registro que não existe.
+async function buscarPorId(id) {
+  try {
+    return await requisitarCrud(`/${encodeURIComponent(id)}`);
+  } catch (erro) {
+    if (erro.name === 'AbortError') throw erro;
+    await listar();
+    const naoEncontrado = new Error('Registro não encontrado');
+    naoEncontrado.naoEncontrado = true;
+    throw naoEncontrado;
+  }
 }
 
 function atualizar(id, cliente) {
@@ -68,6 +78,7 @@ function excluir(id) {
 // Por isso a mensagem geral cobre ID vencido e serviço fora do ar ao mesmo tempo.
 function mensagemErroCrud(erro) {
   if (!idConfigurado()) return MENSAGEM_SEM_ID;
+  if (erro.naoEncontrado) return 'Registro não encontrado.';
   if (erro.name === 'AbortError') return 'O CrudCrud demorou demais para responder. Tente de novo em instantes.';
   return 'Não deu para acessar o CrudCrud. Se o ID venceu, gere outro em crudcrud.com e atualize o js/config.js. Se o ID é novo, tente de novo em instantes.';
 }
