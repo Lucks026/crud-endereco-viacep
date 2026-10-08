@@ -1,12 +1,19 @@
 const tabela = document.getElementById('tabela');
 const corpoTabela = document.getElementById('corpo-tabela');
 const estado = document.getElementById('estado');
+const mensagem = document.getElementById('mensagem');
+const linkNovo = document.getElementById('link-novo');
 
 let clientes = [];
 
 function mostrarEstado(texto, tipo = 'info') {
   estado.textContent = texto;
   estado.dataset.tipo = tipo;
+}
+
+function mostrarMensagem(texto, tipo = 'info') {
+  mensagem.textContent = texto;
+  mensagem.dataset.tipo = tipo;
 }
 
 // textContent, e não innerHTML: o que foi digitado no cadastro entra como texto puro
@@ -24,9 +31,39 @@ function criarAcoes(cliente) {
   editar.textContent = 'Editar';
   editar.setAttribute('aria-label', `Editar ${cliente.nome}`);
 
+  const botaoExcluir = document.createElement('button');
+  botaoExcluir.type = 'button';
+  botaoExcluir.className = 'botao botao-perigo';
+  botaoExcluir.textContent = 'Excluir';
+  botaoExcluir.setAttribute('aria-label', `Excluir ${cliente.nome}`);
+  botaoExcluir.addEventListener('click', () => excluirCliente(cliente, botaoExcluir));
+
   const celula = document.createElement('td');
-  celula.append(editar);
+  celula.append(editar, botaoExcluir);
   return celula;
+}
+
+async function excluirCliente(cliente, botao) {
+  if (!confirm(`Excluir ${cliente.nome}?`)) return;
+
+  botao.disabled = true;
+  botao.textContent = 'Excluindo...';
+  try {
+    await excluir(cliente._id);
+  } catch (erro) {
+    mostrarMensagem(mensagemErroCrud(erro), 'erro');
+    botao.disabled = false;
+    botao.textContent = 'Excluir';
+    botao.focus();
+    return;
+  }
+
+  // sai do array em memória e a tabela é redesenhada sem um novo GET
+  clientes = clientes.filter(item => item._id !== cliente._id);
+  desenharTabela();
+  mostrarMensagem('Cliente excluído.', 'ok');
+  // o botão sumiu junto com a linha; o foco volta para o topo sem rolar a página
+  linkNovo.focus({ preventScroll: true });
 }
 
 function criarLinha(cliente) {
