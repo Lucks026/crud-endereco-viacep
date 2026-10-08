@@ -101,4 +101,10 @@ async function carregarClientes() {
 
 // pageshow dispara na carga e também quando a página volta do histórico,
 // que é quando a lista em tela pode estar desatualizada
-window.addEventListener('pageshow', carregarClientes);
+window.addEventListener('pageshow', () => {
+  const editado = new URLSearchParams(location.search).get('ok') === 'editado';
+  mostrarMensagem(editado ? 'Cliente atualizado.' : '', 'ok');
+  // tira o ?ok=editado da URL para a mensagem não voltar ao recarregar
+  if (editado) history.replaceState(null, '', location.pathname);
+  carregarClientes();
+});
