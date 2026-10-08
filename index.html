@@ -68,6 +68,21 @@
             </div>
           </div>
         </fieldset>
+
+        <fieldset>
+          <legend><span class="prompt" aria-hidden="true">~$</span> Endereço</legend>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="cep">CEP <span aria-hidden="true">*</span></label>
+              <div class="campo-com-botao">
+                <input type="text" id="cep" name="cep" inputmode="numeric" required aria-describedby="erro-cep">
+                <button type="button" class="botao" id="botao-cep">Pesquisar CEP</button>
+              </div>
+              <p class="campo-erro" id="erro-cep" aria-live="polite"></p>
+            </div>
+          </div>
+        </fieldset>
       </form>
     </div>
   </main>
