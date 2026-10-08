@@ -294,6 +294,11 @@ input[aria-invalid="true"] {
   color: var(--texto-fraco);
 }
 
+.busca {
+  max-width: 24rem;
+  margin-bottom: var(--espaco-3);
+}
+
 .tabela {
   width: 100%;
   border-collapse: collapse;
