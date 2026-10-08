@@ -245,6 +245,15 @@ input[aria-invalid="true"] {
   color: var(--verde);
 }
 
+.botao-perigo {
+  border-color: var(--vermelho);
+  color: var(--vermelho);
+}
+
+.botao-perigo:hover:not(:disabled) {
+  background: var(--vermelho);
+}
+
 .botao:disabled {
   opacity: 0.6;
   cursor: wait;
