@@ -1,7 +1,19 @@
 const formulario = document.getElementById('formulario');
 const campos = formulario.elements;
+const mensagem = document.getElementById('mensagem');
 
 const soDigitos = texto => texto.replace(/\D/g, '');
+
+function mostrarMensagem(texto, tipo = 'info') {
+  mensagem.textContent = texto;
+  mensagem.dataset.tipo = tipo;
+}
+
+function mostrarErroCampo(campo, texto) {
+  document.getElementById(`erro-${campo.id}`).textContent = texto;
+  if (texto) campo.setAttribute('aria-invalid', 'true');
+  else campo.removeAttribute('aria-invalid');
+}
 
 function mascararCep(valor) {
   return soDigitos(valor).slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2');
