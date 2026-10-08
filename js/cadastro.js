@@ -23,7 +23,20 @@ function mascararTelefone(valor) {
 
 const mascaras = { cep: mascararCep, cpf: mascararCpf, telefone: mascararTelefone };
 
+// Reaplica a máscara e devolve o cursor para depois do mesmo dígito em que ele estava.
+// Sem isso, corrigir um número no meio do campo joga o cursor para o fim.
+function aplicarMascara(campo) {
+  const digitosAntes = soDigitos(campo.value.slice(0, campo.selectionStart)).length;
+  campo.value = mascaras[campo.id](campo.value);
+
+  let posicao = 0;
+  for (let vistos = 0; vistos < digitosAntes && posicao < campo.value.length; posicao++) {
+    if (/\d/.test(campo.value[posicao])) vistos++;
+  }
+  campo.setSelectionRange(posicao, posicao);
+}
+
 formulario.addEventListener('input', evento => {
   const campo = evento.target;
-  if (mascaras[campo.id]) campo.value = mascaras[campo.id](campo.value);
+  if (mascaras[campo.id]) aplicarMascara(campo);
 });
