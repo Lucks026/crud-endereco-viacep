@@ -58,6 +58,10 @@ a {
   border-radius: var(--espaco-2);
 }
 
+.janela-larga {
+  max-width: 64rem;
+}
+
 .janela-barra {
   display: flex;
   align-items: center;
@@ -297,10 +301,6 @@ input[aria-invalid="true"] {
 
 [data-tipo="erro"] {
   color: var(--vermelho);
-}
-
-.janela-larga {
-  max-width: 64rem;
 }
 
 .busca {
