@@ -189,6 +189,8 @@ label {
 
 input {
   width: 100%;
+  /* o campo de data nasce 2px mais alto que os de texto */
+  min-height: 2.75rem;
   padding: var(--espaco-2);
   background: var(--elevado);
   border: 1px solid var(--borda-campo);
