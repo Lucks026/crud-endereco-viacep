@@ -276,6 +276,68 @@ input[aria-invalid="true"] {
   color: var(--vermelho);
 }
 
+.janela-larga {
+  max-width: 64rem;
+}
+
+.estado {
+  margin: 0;
+  color: var(--texto-fraco);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela th {
+  color: var(--texto-fraco);
+  font-size: var(--pequeno);
+  font-weight: 400;
+  text-align: left;
+}
+
+/* No celular cada linha vira um bloco e o nome da coluna vem do data-rotulo */
+.tabela thead {
+  display: none;
+}
+
+.tabela tr {
+  display: block;
+  padding: var(--espaco-3) 0;
+  border-top: 1px solid var(--borda);
+}
+
+.tabela td {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.tabela td[data-rotulo]::before {
+  content: attr(data-rotulo) ": ";
+  color: var(--texto-fraco);
+}
+
+@media (min-width: 640px) {
+  .tabela thead {
+    display: table-header-group;
+  }
+
+  .tabela tr {
+    display: table-row;
+  }
+
+  .tabela th,
+  .tabela td {
+    display: table-cell;
+    padding: var(--espaco-2);
+  }
+
+  .tabela td[data-rotulo]::before {
+    content: none;
+  }
+}
+
 .rodape {
   margin-top: var(--espaco-4);
   color: var(--texto-fraco);
