@@ -285,6 +285,12 @@ input[aria-invalid="true"] {
   content: "> " / "";
 }
 
+.estado {
+  margin: 0;
+  color: var(--texto-fraco);
+}
+
+/* depois de .estado, para a cor do tipo valer sobre a cor padrão */
 [data-tipo="ok"] {
   color: var(--verde);
 }
@@ -295,11 +301,6 @@ input[aria-invalid="true"] {
 
 .janela-larga {
   max-width: 64rem;
-}
-
-.estado {
-  margin: 0;
-  color: var(--texto-fraco);
 }
 
 .busca {
