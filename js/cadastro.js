@@ -3,6 +3,7 @@ const campos = formulario.elements;
 const mensagem = document.getElementById('mensagem');
 const botaoCep = document.getElementById('botao-cep');
 const botaoSalvar = document.getElementById('botao-salvar');
+const idEdicao = new URLSearchParams(location.search).get('id');
 
 const soDigitos = texto => texto.replace(/\D/g, '');
 
@@ -195,6 +196,29 @@ async function salvar(evento) {
   }
 }
 
+function preencherFormulario(cliente) {
+  const dados = { ...cliente, ...cliente.endereco };
+  for (const campo of formulario.querySelectorAll('input')) {
+    campo.value = dados[campo.id] || '';
+  }
+}
+
+async function carregarEdicao() {
+  document.title = 'Editar cliente';
+  document.getElementById('titulo').textContent = 'Editar cliente';
+  document.getElementById('caminho').textContent = '~/clientes/editar';
+
+  formulario.hidden = true;
+  mostrarMensagem('Carregando cliente...');
+  try {
+    preencherFormulario(await buscarPorId(idEdicao));
+    formulario.hidden = false;
+    mostrarMensagem('');
+  } catch (erro) {
+    mostrarMensagem(mensagemErroCrud(erro), 'erro');
+  }
+}
+
 formulario.addEventListener('input', evento => {
   const campo = evento.target;
   if (mascaras[campo.id]) aplicarMascara(campo);
@@ -213,4 +237,5 @@ campos.cep.addEventListener('keydown', evento => {
 
 formulario.addEventListener('submit', salvar);
 
-if (!idConfigurado()) mostrarMensagem(MENSAGEM_SEM_ID, 'erro');
+if (idEdicao) carregarEdicao();
+else if (!idConfigurado()) mostrarMensagem(MENSAGEM_SEM_ID, 'erro');
