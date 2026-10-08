@@ -1,6 +1,7 @@
 const formulario = document.getElementById('formulario');
 const campos = formulario.elements;
 const mensagem = document.getElementById('mensagem');
+const botaoCep = document.getElementById('botao-cep');
 
 const soDigitos = texto => texto.replace(/\D/g, '');
 
@@ -48,7 +49,60 @@ function aplicarMascara(campo) {
   campo.setSelectionRange(posicao, posicao);
 }
 
+function preencherEndereco(dados) {
+  const valores = {
+    logradouro: dados.logradouro,
+    bairro: dados.bairro,
+    cidade: dados.localidade,
+    uf: dados.uf,
+  };
+  for (const [id, valor] of Object.entries(valores)) {
+    campos[id].value = valor || '';
+  }
+}
+
+function limparEndereco() {
+  preencherEndereco({});
+}
+
+async function pesquisarCep() {
+  if (botaoCep.disabled) return;
+
+  const cep = soDigitos(campos.cep.value);
+  if (cep.length !== 8) {
+    mostrarErroCampo(campos.cep, 'CEP deve ter 8 dígitos.');
+    campos.cep.focus();
+    return;
+  }
+
+  mostrarErroCampo(campos.cep, '');
+  mostrarMensagem('');
+  botaoCep.disabled = true;
+  botaoCep.textContent = 'Pesquisando...';
+  try {
+    const dados = await buscarCep(cep);
+    if (!dados) {
+      limparEndereco();
+      mostrarErroCampo(campos.cep, 'CEP não encontrado.');
+      campos.cep.focus();
+      return;
+    }
+    preencherEndereco(dados);
+    // CEP geral de cidade pequena vem sem logradouro
+    const proximo = dados.logradouro ? campos.numero : campos.logradouro;
+    proximo.focus();
+  } catch {
+    mostrarMensagem('O ViaCEP não respondeu. Tente de novo ou preencha o endereço à mão.', 'erro');
+    campos.cep.focus();
+  } finally {
+    botaoCep.disabled = false;
+    botaoCep.textContent = 'Pesquisar CEP';
+  }
+}
+
 formulario.addEventListener('input', evento => {
   const campo = evento.target;
   if (mascaras[campo.id]) aplicarMascara(campo);
 });
+
+botaoCep.addEventListener('click', pesquisarCep);
