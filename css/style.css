@@ -278,9 +278,7 @@ input:focus-visible,
 }
 
 .tabela th {
-  color: var(--texto-fraco);
-  font-size: var(--pequeno);
-  font-weight: 400;
+  font-weight: 600;
   text-align: left;
 }
 
@@ -291,8 +289,9 @@ input:focus-visible,
 
 .tabela tr {
   display: block;
-  padding: var(--espaco-3) 0;
-  border-top: 1px solid var(--borda);
+  padding: var(--espaco-3);
+  background: var(--camada);
+  border-bottom: 1px solid var(--borda);
 }
 
 .tabela td {
@@ -327,10 +326,15 @@ input:focus-visible,
     display: table-row;
   }
 
+  .tabela thead tr {
+    background: var(--camada-alta);
+  }
+
   .tabela th,
   .tabela td {
     display: table-cell;
-    padding: var(--espaco-2);
+    height: 3rem;
+    padding: 0 var(--espaco-3);
   }
 
   .tabela td[data-rotulo]::before {
