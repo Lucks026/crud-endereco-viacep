@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clientes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="janela janela-larga">
+    <div class="janela-barra">
+      <span class="bolinhas" aria-hidden="true">
+        <span class="bolinha bolinha-vermelha"></span>
+        <span class="bolinha bolinha-amarela"></span>
+        <span class="bolinha bolinha-verde"></span>
+      </span>
+      <span>~/clientes</span>
+    </div>
+
+    <div class="janela-corpo">
+      <header class="cabecalho">
+        <h1>
+          <span class="prompt" aria-hidden="true">~$</span>
+          <span id="titulo">Clientes</span><span class="cursor" aria-hidden="true"></span>
+        </h1>
+        <a class="botao" href="index.html">Novo Cliente</a>
+      </header>
+
+      <table class="tabela" id="tabela" aria-labelledby="titulo" hidden>
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Cidade/UF</th>
+          </tr>
+        </thead>
+        <tbody id="corpo-tabela"></tbody>
+      </table>
+
+      <p class="estado" id="estado" role="status"></p>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    Lucas Lemos Barbosa · <a href="https://github.com/Lucks026">github.com/Lucks026</a>
+  </footer>
+</body>
+</html>
