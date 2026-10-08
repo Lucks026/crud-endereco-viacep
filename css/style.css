@@ -139,3 +139,10 @@ h1 {
     animation: none;
   }
 }
+
+.rodape {
+  margin-top: var(--espaco-4);
+  color: var(--texto-fraco);
+  font-size: var(--pequeno);
+  text-align: center;
+}
