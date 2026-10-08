@@ -9,11 +9,7 @@ async function requisitar(url, opcoes = {}) {
   const temporizador = setTimeout(() => controle.abort(), TEMPO_LIMITE);
   try {
     const resposta = await fetch(url, { ...opcoes, signal: controle.signal });
-    if (!resposta.ok) {
-      const erro = new Error(`HTTP ${resposta.status}`);
-      erro.status = resposta.status;
-      throw erro;
-    }
+    if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
     const texto = await resposta.text();
     return texto ? JSON.parse(texto) : null;
   } finally {
@@ -67,12 +63,11 @@ function excluir(id) {
   return requisitarCrud(`/${encodeURIComponent(id)}`, { method: 'DELETE' });
 }
 
+// As respostas de erro do CrudCrud (ID vencido, registro inexistente, 500) vêm sem
+// cabeçalho de CORS: o navegador esconde o status e o fetch só rejeita.
+// Por isso a mensagem geral cobre ID vencido e serviço fora do ar ao mesmo tempo.
 function mensagemErroCrud(erro) {
   if (!idConfigurado()) return MENSAGEM_SEM_ID;
-  if (erro.status === 404) return 'Registro não encontrado.';
-  if (erro.status >= 400 && erro.status < 500) {
-    return 'O endpoint do CrudCrud expirou ou o ID está errado. Gere um novo em crudcrud.com e atualize o js/config.js.';
-  }
-  // sobra erro 5xx, tempo esgotado ou falha de rede
-  return 'O CrudCrud não respondeu. Tente de novo em instantes.';
+  if (erro.name === 'AbortError') return 'O CrudCrud demorou demais para responder. Tente de novo em instantes.';
+  return 'Não deu para acessar o CrudCrud. Se o ID venceu, gere outro em crudcrud.com e atualize o js/config.js. Se o ID é novo, tente de novo em instantes.';
 }
