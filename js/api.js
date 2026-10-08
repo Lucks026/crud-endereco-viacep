@@ -18,3 +18,9 @@ async function requisitar(url, opcoes = {}) {
     clearTimeout(temporizador);
   }
 }
+
+async function buscarCep(cep) {
+  const dados = await requisitar(`https://viacep.com.br/ws/${cep}/json/`);
+  // CEP que não existe volta com status 200 e o campo erro
+  return dados.erro ? null : dados;
+}
