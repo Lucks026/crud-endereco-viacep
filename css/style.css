@@ -202,6 +202,20 @@ input {
   max-width: 24rem;
 }
 
+input[aria-invalid="true"] {
+  border-color: var(--vermelho);
+}
+
+.campo-erro {
+  margin: 0;
+  color: var(--vermelho);
+  font-size: var(--pequeno);
+}
+
+.campo-erro:not(:empty) {
+  margin-top: var(--espaco-1);
+}
+
 .botao {
   display: inline-block;
   padding: var(--espaco-2) var(--espaco-3);
