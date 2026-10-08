@@ -343,7 +343,7 @@ input:focus-visible,
 }
 
 .rodape {
-  margin-top: var(--espaco-4);
+  margin-top: var(--espaco-5);
   color: var(--texto-fraco);
   font-size: var(--pequeno);
   text-align: center;
