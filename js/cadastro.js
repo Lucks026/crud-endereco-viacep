@@ -212,3 +212,5 @@ campos.cep.addEventListener('keydown', evento => {
 });
 
 formulario.addEventListener('submit', salvar);
+
+if (!idConfigurado()) mostrarMensagem(MENSAGEM_SEM_ID, 'erro');
