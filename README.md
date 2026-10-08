@@ -40,3 +40,19 @@ O endereço vai dentro do cliente, no objeto `endereco`.
 Os campos que o ViaCEP preenche continuam editáveis. CEP geral de cidade pequena (38490-000, por exemplo) volta sem logradouro e sem bairro, e aí é preciso digitar.
 
 O CPF só confere a quantidade de dígitos, para dar para testar com qualquer número.
+
+## Arquivos
+
+```
+index.html       cadastro e edição
+listagem.html    listagem
+css/style.css
+js/config.js     ID do CrudCrud e nome do recurso
+js/api.js        chamadas ao ViaCEP e ao CrudCrud
+js/cadastro.js   formulário
+js/listagem.js   tabela
+```
+
+## Autor
+
+Lucas Lemos Barbosa
