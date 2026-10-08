@@ -245,10 +245,17 @@ input:focus-visible,
   position: sticky;
   bottom: var(--espaco-3);
   margin-top: var(--espaco-3);
-  padding: var(--espaco-2) var(--espaco-3);
-  background: var(--camada);
-  border: 1px solid currentColor;
-  border-radius: var(--espaco-1);
+  padding: var(--espaco-3);
+  background: var(--camada-alta);
+  border-left: 3px solid var(--borda-campo);
+}
+
+.saida[data-tipo="ok"] {
+  border-left-color: var(--verde);
+}
+
+.saida[data-tipo="erro"] {
+  border-left-color: var(--vermelho);
 }
 
 .estado {
@@ -256,12 +263,7 @@ input:focus-visible,
   color: var(--texto-fraco);
 }
 
-/* depois de .estado, para a cor do tipo valer sobre a cor padrão */
-[data-tipo="ok"] {
-  color: var(--verde);
-}
-
-[data-tipo="erro"] {
+.estado[data-tipo="erro"] {
   color: var(--vermelho);
 }
 
