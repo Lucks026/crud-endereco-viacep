@@ -106,3 +106,10 @@ formulario.addEventListener('input', evento => {
 });
 
 botaoCep.addEventListener('click', pesquisarCep);
+
+// Enter no campo CEP pesquisa o endereço em vez de enviar o formulário
+campos.cep.addEventListener('keydown', evento => {
+  if (evento.key !== 'Enter') return;
+  evento.preventDefault();
+  pesquisarCep();
+});
