@@ -82,6 +82,45 @@
               <p class="campo-erro" id="erro-cep" aria-live="polite"></p>
             </div>
           </div>
+
+          <div class="linha linha-larga">
+            <div class="campo">
+              <label for="logradouro">Logradouro <span aria-hidden="true">*</span></label>
+              <input type="text" id="logradouro" name="logradouro" required aria-describedby="erro-logradouro">
+              <p class="campo-erro" id="erro-logradouro"></p>
+            </div>
+            <div class="campo">
+              <label for="numero">Número <span aria-hidden="true">*</span></label>
+              <input type="text" id="numero" name="numero" required aria-describedby="erro-numero">
+              <p class="campo-erro" id="erro-numero"></p>
+            </div>
+          </div>
+
+          <div class="linha linha-dupla">
+            <div class="campo">
+              <label for="complemento">Complemento</label>
+              <input type="text" id="complemento" name="complemento" aria-describedby="erro-complemento">
+              <p class="campo-erro" id="erro-complemento"></p>
+            </div>
+            <div class="campo">
+              <label for="bairro">Bairro <span aria-hidden="true">*</span></label>
+              <input type="text" id="bairro" name="bairro" required aria-describedby="erro-bairro">
+              <p class="campo-erro" id="erro-bairro"></p>
+            </div>
+          </div>
+
+          <div class="linha linha-larga">
+            <div class="campo">
+              <label for="cidade">Cidade <span aria-hidden="true">*</span></label>
+              <input type="text" id="cidade" name="cidade" required aria-describedby="erro-cidade">
+              <p class="campo-erro" id="erro-cidade"></p>
+            </div>
+            <div class="campo">
+              <label for="uf">UF <span aria-hidden="true">*</span></label>
+              <input type="text" class="caixa-alta" id="uf" name="uf" maxlength="2" required aria-describedby="erro-uf">
+              <p class="campo-erro" id="erro-uf"></p>
+            </div>
+          </div>
         </fieldset>
       </form>
     </div>
