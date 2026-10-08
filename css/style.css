@@ -179,12 +179,15 @@ input:focus-visible,
 }
 
 .botao {
-  display: inline-block;
-  padding: var(--espaco-2) var(--espaco-3);
-  background: transparent;
-  border: 1px solid var(--link);
-  border-radius: var(--espaco-1);
-  color: var(--link);
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  /* texto à esquerda, com folga maior à direita */
+  padding: 0 var(--espaco-6) 0 var(--espaco-3);
+  background: var(--cinza);
+  border: 1px solid transparent;
+  border-radius: 0;
+  color: var(--branco);
   font: inherit;
   text-decoration: none;
   white-space: nowrap;
@@ -192,28 +195,40 @@ input:focus-visible,
 }
 
 .botao:hover:not(:disabled) {
-  background: var(--link);
-  color: var(--fundo);
+  background: var(--cinza-escuro);
 }
 
 .botao-principal {
-  background: var(--link);
-  color: var(--fundo);
-  font-weight: 700;
+  min-height: 3rem;
+  background: var(--azul);
 }
 
 .botao-principal:hover:not(:disabled) {
+  background: var(--azul-escuro);
+}
+
+.botao-contorno {
   background: transparent;
+  border-color: var(--link);
   color: var(--link);
 }
 
+.botao-contorno:hover:not(:disabled) {
+  background: var(--azul);
+  border-color: var(--azul);
+  color: var(--branco);
+}
+
 .botao-perigo {
+  background: transparent;
   border-color: var(--vermelho);
   color: var(--vermelho);
 }
 
 .botao-perigo:hover:not(:disabled) {
-  background: var(--vermelho);
+  background: var(--vermelho-escuro);
+  border-color: var(--vermelho-escuro);
+  color: var(--branco);
 }
 
 .botao:disabled {
@@ -293,8 +308,8 @@ input:focus-visible,
 }
 
 .tabela .botao {
-  padding: var(--espaco-1) var(--espaco-2);
-  font-size: var(--pequeno);
+  min-height: 2rem;
+  padding: 0 var(--espaco-3);
 }
 
 .tabela .botao + .botao {

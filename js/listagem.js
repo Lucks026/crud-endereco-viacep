@@ -29,7 +29,7 @@ function criarCelula(rotulo, texto) {
 function criarAcoes(cliente) {
   const editar = document.createElement('a');
   editar.href = `index.html?id=${encodeURIComponent(cliente._id)}`;
-  editar.className = 'botao';
+  editar.className = 'botao botao-contorno';
   editar.textContent = 'Editar';
   editar.setAttribute('aria-label', `Editar ${cliente.nome}`);
 
