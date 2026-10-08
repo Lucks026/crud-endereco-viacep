@@ -196,6 +196,12 @@ input {
   text-transform: uppercase;
 }
 
+.campo-com-botao {
+  display: flex;
+  gap: var(--espaco-2);
+  max-width: 24rem;
+}
+
 .botao {
   display: inline-block;
   padding: var(--espaco-2) var(--espaco-3);
