@@ -27,6 +27,11 @@
   box-sizing: border-box;
 }
 
+html {
+  /* folga para o aviso preso na base não cobrir o campo que recebe o foco */
+  scroll-padding-bottom: 5rem;
+}
+
 body {
   margin: 0;
   padding: var(--espaco-3);
@@ -266,11 +271,12 @@ input[aria-invalid="true"] {
 /* fica presa na base da tela para aparecer mesmo com a página rolada */
 .saida:not(:empty) {
   position: sticky;
-  bottom: 0;
+  bottom: var(--espaco-3);
   margin-top: var(--espaco-3);
-  padding: var(--espaco-2) 0;
-  background: var(--janela);
-  border-top: 1px solid var(--borda);
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--elevado);
+  border: 1px solid currentColor;
+  border-radius: var(--espaco-1);
 }
 
 .saida:not(:empty)::before {
