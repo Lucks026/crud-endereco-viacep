@@ -45,29 +45,6 @@ function criarAcoes(cliente) {
   return celula;
 }
 
-async function excluirCliente(cliente, botao) {
-  if (!confirm(`Excluir ${cliente.nome}?`)) return;
-
-  botao.disabled = true;
-  botao.textContent = 'Excluindo...';
-  try {
-    await excluir(cliente._id);
-  } catch (erro) {
-    mostrarMensagem(mensagemErroCrud(erro), 'erro');
-    botao.disabled = false;
-    botao.textContent = 'Excluir';
-    botao.focus();
-    return;
-  }
-
-  // sai do array em memória e a tabela é redesenhada sem um novo GET
-  clientes = clientes.filter(item => item._id !== cliente._id);
-  desenharTabela();
-  mostrarMensagem('Cliente excluído.', 'ok');
-  // o botão sumiu junto com a linha; o foco volta para o topo sem rolar a página
-  linkNovo.focus({ preventScroll: true });
-}
-
 function criarLinha(cliente) {
   const endereco = cliente.endereco || {};
   const cidadeUf = [endereco.cidade, endereco.uf].filter(Boolean).join('/');
@@ -112,6 +89,29 @@ async function carregarClientes() {
     return;
   }
   desenharTabela();
+}
+
+async function excluirCliente(cliente, botao) {
+  if (!confirm(`Excluir ${cliente.nome}?`)) return;
+
+  botao.disabled = true;
+  botao.textContent = 'Excluindo...';
+  try {
+    await excluir(cliente._id);
+  } catch (erro) {
+    mostrarMensagem(mensagemErroCrud(erro), 'erro');
+    botao.disabled = false;
+    botao.textContent = 'Excluir';
+    botao.focus();
+    return;
+  }
+
+  // sai do array em memória e a tabela é redesenhada sem um novo GET
+  clientes = clientes.filter(item => item._id !== cliente._id);
+  desenharTabela();
+  mostrarMensagem('Cliente excluído.', 'ok');
+  // o botão sumiu junto com a linha; o foco volta para o topo sem rolar a página
+  linkNovo.focus({ preventScroll: true });
 }
 
 campoBusca.addEventListener('input', desenharTabela);
