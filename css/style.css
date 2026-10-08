@@ -25,8 +25,8 @@
   --espaco-5: 2rem;
   --espaco-6: 3rem;
 
-  --fonte: 'JetBrains Mono', monospace;
-  --pequeno: 0.875rem;
+  --fonte: 'IBM Plex Sans', system-ui, sans-serif;
+  --pequeno: 0.75rem;
 }
 
 *,
@@ -46,6 +46,7 @@ body {
   background: var(--fundo);
   color: var(--texto);
   font-family: var(--fonte);
+  font-size: 0.875rem;
   line-height: 1.5;
 }
 
