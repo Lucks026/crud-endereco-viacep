@@ -45,8 +45,10 @@ function listar() {
   return requisitarCrud();
 }
 
-// O 404 também chega sem status. Se a busca falha mas a listagem responde,
-// o endpoint está de pé e é o registro que não existe.
+// As respostas de erro do CrudCrud (ID vencido, registro inexistente, 500) vêm sem
+// cabeçalho de CORS: o navegador esconde o status e o fetch só rejeita.
+// Então, se a busca falha mas a listagem responde, o endpoint está de pé
+// e é o registro que não existe.
 async function buscarPorId(id) {
   try {
     return await requisitarCrud(`/${encodeURIComponent(id)}`);
@@ -73,9 +75,8 @@ function excluir(id) {
   return requisitarCrud(`/${encodeURIComponent(id)}`, { method: 'DELETE' });
 }
 
-// As respostas de erro do CrudCrud (ID vencido, registro inexistente, 500) vêm sem
-// cabeçalho de CORS: o navegador esconde o status e o fetch só rejeita.
-// Por isso a mensagem geral cobre ID vencido e serviço fora do ar ao mesmo tempo.
+// Sem o status (ver buscarPorId) não dá para separar ID vencido de serviço fora do ar,
+// então a mensagem geral cobre os dois.
 function mensagemErroCrud(erro) {
   if (!idConfigurado()) return MENSAGEM_SEM_ID;
   if (erro.naoEncontrado) return 'Registro não encontrado.';
