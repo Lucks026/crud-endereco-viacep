@@ -127,21 +127,23 @@ legend {
 
 label {
   display: block;
-  margin-bottom: var(--espaco-1);
+  margin-bottom: var(--espaco-2);
   color: var(--texto-fraco);
   font-size: var(--pequeno);
 }
 
 input {
   width: 100%;
-  /* o campo de data nasce 2px mais alto que os de texto */
-  min-height: 2.75rem;
-  padding: var(--espaco-2);
+  min-height: 2.5rem;
+  padding: 0 var(--espaco-3);
   background: var(--camada);
-  border: 1px solid var(--borda-campo);
-  border-radius: var(--espaco-1);
+  border: 0;
+  border-bottom: 1px solid var(--borda-campo);
+  border-radius: 0;
   color: var(--texto);
   font: inherit;
+  /* com menos de 16px o iOS dá zoom na página ao focar o campo */
+  font-size: 1rem;
 }
 
 .caixa-alta {
@@ -155,7 +157,15 @@ input {
 }
 
 input[aria-invalid="true"] {
-  border-color: var(--vermelho);
+  outline: 2px solid var(--vermelho);
+  outline-offset: -2px;
+}
+
+/* em campo e botão o contorno de foco fica por dentro, para não encostar no vizinho */
+input:focus-visible,
+.botao:focus-visible {
+  outline: 2px solid var(--texto);
+  outline-offset: -2px;
 }
 
 .campo-erro {
