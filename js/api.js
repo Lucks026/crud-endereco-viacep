@@ -1,5 +1,6 @@
 const TEMPO_LIMITE = 10000;
 const CABECALHO_JSON = { 'Content-Type': 'application/json' };
+const MENSAGEM_SEM_ID = 'Falta o ID do CrudCrud. Gere um em crudcrud.com e cole no js/config.js.';
 
 // Devolve o JSON da resposta, ou null quando ela vem sem corpo,
 // que é como o CrudCrud responde ao PUT e ao DELETE.
@@ -46,4 +47,14 @@ function criar(cliente) {
 
 function listar() {
   return requisitarCrud();
+}
+
+function mensagemErroCrud(erro) {
+  if (!idConfigurado()) return MENSAGEM_SEM_ID;
+  if (erro.status === 404) return 'Registro não encontrado.';
+  if (erro.status >= 400 && erro.status < 500) {
+    return 'O endpoint do CrudCrud expirou ou o ID está errado. Gere um novo em crudcrud.com e atualize o js/config.js.';
+  }
+  // sobra erro 5xx, tempo esgotado ou falha de rede
+  return 'O CrudCrud não respondeu. Tente de novo em instantes.';
 }
