@@ -49,6 +49,24 @@ function listar() {
   return requisitarCrud();
 }
 
+function buscarPorId(id) {
+  return requisitarCrud(`/${encodeURIComponent(id)}`);
+}
+
+function atualizar(id, cliente) {
+  // o CrudCrud devolve 500 se o corpo do PUT levar o _id
+  const { _id, ...dados } = cliente;
+  return requisitarCrud(`/${encodeURIComponent(id)}`, {
+    method: 'PUT',
+    headers: CABECALHO_JSON,
+    body: JSON.stringify(dados),
+  });
+}
+
+function excluir(id) {
+  return requisitarCrud(`/${encodeURIComponent(id)}`, { method: 'DELETE' });
+}
+
 function mensagemErroCrud(erro) {
   if (!idConfigurado()) return MENSAGEM_SEM_ID;
   if (erro.status === 404) return 'Registro não encontrado.';
