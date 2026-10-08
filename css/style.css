@@ -196,6 +196,40 @@ input {
   text-transform: uppercase;
 }
 
+.botao {
+  display: inline-block;
+  padding: var(--espaco-2) var(--espaco-3);
+  background: transparent;
+  border: 1px solid var(--verde);
+  border-radius: var(--espaco-1);
+  color: var(--verde);
+  font: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.botao:hover:not(:disabled) {
+  background: var(--verde);
+  color: var(--fundo);
+}
+
+.botao-principal {
+  background: var(--verde);
+  color: var(--fundo);
+  font-weight: 700;
+}
+
+.botao-principal:hover:not(:disabled) {
+  background: transparent;
+  color: var(--verde);
+}
+
+.botao:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
 .rodape {
   margin-top: var(--espaco-4);
   color: var(--texto-fraco);
